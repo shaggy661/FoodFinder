@@ -1,0 +1,292 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+    <h1 class="text-center">Edit Restaurant</h1>
+    <div class="col-md-6 offset-md-3">
+        <form action="/restaurants/<%= restaurant._id %>?_method=PUT" method="POST" novalidate class="validated-form"
+            enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="restaurant[title]"
+                    value="<%= restaurant.title %>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Title is required.
+                </div>
+            </div>
+            
+            <!-- <div class="mb-3">
+                <label class="form-label" for="location">Location</label>
+                <input class="form-control" type="text" id="location" name="restaurant[location]"
+                    value="<%= restaurant.location %>" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Location is required.
+                </div>
+            </div> -->
+
+            <div class="mb-3 row">
+              <div class="col-md-4">
+                <label class="form-label" for="address">Address</label>
+                <input class="form-control" type="text" id="address" name="restaurant[address]" value="<%= restaurant.address %>" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Address is required.
+                </div>
+              </div>
+      
+              <div class="col-md-2">
+                <label class="form-label" for="postcode">Post Code</label>
+                <input class="form-control" type="text" id="postcode" name="restaurant[postcode]" value="<%= restaurant.postcode %>" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Post code is required.
+                </div>
+              </div>
+      
+              <div class="col-md-3">
+                <label class="form-label" for="city">City</label>
+                <input class="form-control" type="text" id="city" name="restaurant[city]" value="<%= restaurant.city %>" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  City is required.
+                </div>
+              </div>
+      
+              <div class="col-md-3">
+                <label class="form-label" for="country">Country</label>
+                <input class="form-control" type="text" id="country" name="restaurant[country]" value="<%= restaurant.country %>" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Country is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Add Image(s)</label>
+                <input type="file" class="form-control" id="image" name="image" multiple>
+            </div>
+
+            <div class="mb-3 row">
+              <div class="col-md-6">
+                <label class="form-label" for="minprice">Minimum price per person</label>
+                <div class="input-group">
+                  <span class="input-group-text" id="minprice-label">€</span>
+                  <input type="text" class="form-control" id="minprice" placeholder="0.00" aria-label="Minimum price per person"
+                  aria-describedby="minprice-label" name="restaurant[minprice]" value="<%= restaurant.minprice %>" required>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div class="invalid-feedback">
+                    Minimum price is required.
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col-md-6">
+                <label class="form-label" for="maxprice">Maximum price per person</label>
+                <div class="input-group">
+                  <span class="input-group-text" id="maxprice-label">€</span>
+                  <input type="text" class="form-control" id="maxprice" placeholder="0.00" aria-label="Maximum price per person"
+                  aria-describedby="maxprice-label" name="restaurant[maxprice]" value="<%= restaurant.maxprice %>" required>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                  <div class="invalid-feedback">
+                    Maximum price is required.
+                  </div>
+                </div>
+              </div>
+
+
+
+            <div class="mb-3 row">
+              <div class="col-md-4">
+                <label class="form-label" for="website">Website</label>
+                <input class="form-control" type="text" id="website" aria-label="Website" name="restaurant[website]" value="<%= restaurant.website %>">
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="telephone">Telephone</label>
+                <input class="form-control" type="text" id="telephone" aria-label="Telephone" name="restaurant[telephone]" 
+                  required value="<%= restaurant.telephone %>">
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Telephone is required.
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="email" id="email" aria-label="Email" name="restaurant[email]" value="<%= restaurant.email %>">
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+      
+            </div>
+
+            <div class="mb-3">
+            <p class="form-label">Cuisines</p>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="American" value="American" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'American'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="American">American</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Asian" value="Asian" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Asian'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Asian">Asian</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Bar" value="Bar" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Bar'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Bar">Bar</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Barbeque" value="Barbeque" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Barbeque'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Barbeque">Barbeque</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Cafe" value="Cafe" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Cafe'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Cafe">Cafe</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Chinese" value="Chinese" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Chinese'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Chinese">Chinese</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Creperie" value="Creperie" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Creperie'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Creperie">Creperie</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="European" value="European" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'European'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="European">European</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Fast Food" value="Fast Food" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Fast Food'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Fast Food">Fast Food</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Greek" value="Greek" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Greek'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Greek">Greek</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Grill" value="Grill" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Grill'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Grill">Grill</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Indian" value="Indian" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Indian'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Indian">Indian</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="International" value="International" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'International'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="International">International</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Hamburgers" value="Hamburgers" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Hamburgers'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Hamburgers">Hamburgers</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Japanese" value="Japanese" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Japanese'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Japanese">Japanese</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Korean" value="Korean" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Korean'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Korean">Korean</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Mediterranean" value="Mediterranean" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Mediterranean'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Mediterranean">Mediterranean</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Noodle" value="Noodle" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Noodle'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Noodle">Noodle</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Pasta" value="Pasta" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Pasta'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Pasta">Pasta</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Pizza" value="Pizza" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Pizza'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Pizza">Pizza</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input acb" type="checkbox" id="Thai" value="Thai" name="restaurant[cuisines]" <% for(cuisines of restaurant.cuisines){if(cuisines === 'Thai'){%>checked<%}} %> onclick='deRequire("acb")' >
+                <label class="form-check-label" for="Thai">Thai</label>
+              </div>
+
+              <!-- <input class="acb" onclick='deRequire("acb")' style="display: none;" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                At least one cuisine is required.
+              </div>
+
+              </div>
+              
+              <script>
+                function deRequire(elClass) {
+                  el = document.getElementsByClassName(elClass);
+              
+                  var atLeastOneChecked = false;//at least one cb is checked
+                  for (i = 0; i < el.length; i++) {
+                    if (el[i].checked === true) {
+                      atLeastOneChecked = true;
+                    }
+                  }
+              
+                  if (atLeastOneChecked === true) {
+                    for (i = 0; i < el.length; i++) {
+                      el[i].required = false;
+                    }
+                  } else {
+                    for (i = 0; i < el.length; i++) {
+                      el[i].required = true;
+                    }
+                  }
+                }
+              </script> -->
+              
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" id="description" name="restaurant[description]"
+                    required><%= restaurant.description %></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Description is required.
+                </div>
+            </div>
+            <div class="mb-3">
+                <% restaurant.images.forEach(function(img, i){ %>
+                <img src="<%= img.thumbnail %>" alt="" class="img-thumbnail">
+                <div class="form-check-inline">
+                    <input type="checkbox" id="image-<%= i %>" name="deleteImages[]" value="<%= img.filename %>">
+                </div>
+                <label for="image-<%= i %>">Delete</label>
+                <% }) %>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-info">Update Restaurant</button>
+            </div>
+        </form>
+        <a href="/restaurants/<%= restaurant._id %> ">Back to Restaurant</a>
+    </div>
+</div>
